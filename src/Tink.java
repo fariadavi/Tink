@@ -4,23 +4,22 @@ import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
 import Controller.LoginController;
-import Model.LoginModel;
-import View.Login;
+import View.TelaLogin;
 
 public class Tink {
 
 	public static void main(String args[]) {
 		setUIFont(new FontUIResource("Tahoma", 0, 11));
 
-		Login view = new Login();
-		LoginModel model = new LoginModel();
+		TelaLogin view = new TelaLogin();
 
 		@SuppressWarnings("unused")
-		LoginController controller = new LoginController(view, model);
+		LoginController controller = new LoginController(view);
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				view.setVisible(true);
+				view.setLocationRelativeTo(null);
 			}
 		});
 	}

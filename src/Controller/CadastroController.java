@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Model.Cadastro;
+import Model.ManipulaCadastros;
+import Model.tiposArquivo;
 import View.TelaCadastro;
 
 public class CadastroController {
@@ -20,21 +22,44 @@ public class CadastroController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals("Cancelar"))
-				cadView.dispose();
-			else if (e.getActionCommand().equals("Limpar"))
-				cadView.limpaCadastro();
-			else if (e.getActionCommand().equals("Enviar"))
-				if (cadView.cadastroCompleto()) {
-					if (cadView.getPswd().equals(cadView.getConfPswd()))
-						new Cadastro(cadView.getUser(), cadView.getPswd(), cadView.getMail(), cadView.getTipoAcesso());
-					else
-						cadView.displayMessage("Os campos de senha não coincidem!");
-				} else {
-					cadView.displayMessage("Cadastro incompleto!\nTodos os campos são obrigatórios!");
-				}
-					
-		}
 
+			switch (e.getActionCommand()) {
+			case "Cancelar":
+				cadView.dispose();
+				break;
+			case "Limpar":
+				cadView.limpaCadastro();
+				break;
+			case "Enviar":
+				if (!cadView.cadastroPreenchido()) {
+					cadView.displayMessage("Cadastro incompleto!\nTodos os campos são obrigatórios!");
+					break;
+				}
+
+				if (!cadView.getPswd().equals(cadView.getConfPswd())) {
+					cadView.displayMessage("Os campos de senha não coincidem!");
+					break;
+				}
+
+				Cadastro novoCadastro = new Cadastro(cadView.getUser(), cadView.getPswd(), cadView.getMail(), cadView.isAluno(), cadView.isProfessor());
+
+				if (!novoCadastro.isValidMail()) {
+					cadView.displayMessage("Formato de e-mail inválido!");
+					break;
+				}
+
+				String errorMessage = novoCadastro.checkForUser();
+				if (!errorMessage.isEmpty()) {
+					cadView.displayMessage(errorMessage);
+					break;
+				}
+
+				ManipulaCadastros.adicionaCadastro(novoCadastro, tiposArquivo.CADASTRO);
+
+				cadView.displayMessage("Usuário cadastrado com sucesso!");
+				cadView.dispose();
+				break;
+			}
+		}
 	}
 }

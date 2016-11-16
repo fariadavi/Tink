@@ -14,10 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-
-import Model.tiposAcesso;
 
 public class TelaCadastro extends JDialog {
 
@@ -176,41 +173,41 @@ public class TelaCadastro extends JDialog {
 		tipoAcesso.clearSelection();
 	}
     
+    public boolean cadastroPreenchido() {
+    	return !getMail().isEmpty() && !getUser().isEmpty() && !getPswd().isEmpty() && !getConfPswd().isEmpty() && (isProfessor() || isAluno());
+    }
+    
+    public void addCadastroListener(ActionListener listenCad) {
+    	botaoCancelar.addActionListener(listenCad);
+    	botaoLimpar.addActionListener(listenCad);
+    	botaoEnviar.addActionListener(listenCad);
+    }
+    
+    public void displayMessage(String msg) {
+    	JOptionPane.showMessageDialog(this, msg);
+    }
+    
 	public String getMail() {
-		return fieldMail.getText();
+		return fieldMail.getText().trim();
 	}
 	
 	public String getUser() {
-		return fieldUser.getText();
+		return fieldUser.getText().trim();
 	}
 	
 	public String getPswd() {
-		return new String(fieldPswd.getPassword());
+		return new String(fieldPswd.getPassword()).trim();
 	}
 	
 	public String getConfPswd() {
-		return new String(fieldConfirmPswd.getPassword());
+		return new String(fieldConfirmPswd.getPassword()).trim();
 	}
 	
-	public tiposAcesso getTipoAcesso() {
-		if(isProfessor.isSelected()) 
-			return tiposAcesso.PROFESSOR;
-		else if (isAluno.isSelected())
-			return tiposAcesso.ALUNO;
-		return null;		
-	}
-	
-	public void addCadastroListener(ActionListener listenCad) {
-		botaoCancelar.addActionListener(listenCad);
-		botaoLimpar.addActionListener(listenCad);
-		botaoEnviar.addActionListener(listenCad);
-	}
-	
-	public void displayMessage(String msg) {
-		JOptionPane.showMessageDialog(this, msg);
+	public boolean isProfessor() {
+		return isProfessor.isSelected();
 	}
 
-	public boolean cadastroCompleto() {
-		return !getMail().isEmpty() && !getUser().isEmpty() && !getPswd().isEmpty() && !getConfPswd().isEmpty() && getTipoAcesso() != null;
+	public boolean isAluno() {
+		return isAluno.isSelected();
 	}
 }

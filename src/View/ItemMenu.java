@@ -1,7 +1,10 @@
 package View;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Insets;
 
 import javax.swing.*;
 
@@ -9,7 +12,7 @@ public class ItemMenu extends JPanel {
 
     private static final long serialVersionUID = -2472558405518314999L;
 	
-	private JLabel labelOpcao;
+	private JButton botaoOpcao;
     private JSeparator separador;
 	
     public ItemMenu() {
@@ -18,7 +21,7 @@ public class ItemMenu extends JPanel {
                           
     private void initComponents() {
 
-        labelOpcao = new JLabel();
+        setBotaoOpcao(new JButton());
         separador = new JSeparator();
 
         setMaximumSize(new Dimension(200, 40));
@@ -26,8 +29,14 @@ public class ItemMenu extends JPanel {
         
         setPreferredSize(new Dimension(200, 40));
 
-        labelOpcao.setText("Text");
-        labelOpcao.setFont(new Font("Tahoma", 0, 18));
+        getBotaoOpcao().setHorizontalAlignment(SwingConstants.LEFT);
+        getBotaoOpcao().setFont(new Font("Tahoma", 0, 18));
+        getBotaoOpcao().setCursor(new Cursor(Cursor.HAND_CURSOR));
+        getBotaoOpcao().setMargin(new Insets(12, 10, 12, 10));
+        getBotaoOpcao().setBorderPainted(false);
+        getBotaoOpcao().setOpaque(false);
+        getBotaoOpcao().setBackground(Color.WHITE);
+        getBotaoOpcao().setText("Lorem Ipsum");
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -36,9 +45,7 @@ public class ItemMenu extends JPanel {
             .addComponent(separador, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 82, Short.MAX_VALUE)
-                    .addComponent(labelOpcao)
-                    .addGap(0, 83, Short.MAX_VALUE)))
+                    .addComponent(getBotaoOpcao())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -47,21 +54,23 @@ public class ItemMenu extends JPanel {
                 .addGap(0, 30, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(labelOpcao)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(getBotaoOpcao())))
         );
     }                    
     
-    public JLabel getLabelOpcao() {
-		return labelOpcao;
+    public void setBotaoOpcaoText(String botaoText) {
+		this.getBotaoOpcao().setText(botaoText);
 	}
     
-    public void setLabelOpcao(JLabel labelOpcao) {
-		this.labelOpcao = labelOpcao;
+    public void setBotaoOpcaoName(String botaoName) {
+    	this.getBotaoOpcao().setName(botaoName);
+    }
+
+	public JButton getBotaoOpcao() {
+		return botaoOpcao;
 	}
-    
-    public void setLabelOpcaoText(String labelOpcaoText) {
-		this.labelOpcao.setText(labelOpcaoText);
+
+	public void setBotaoOpcao(JButton botaoOpcao) {
+		this.botaoOpcao = botaoOpcao;
 	}
 }

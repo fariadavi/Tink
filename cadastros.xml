@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_51" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="Model.Cadastro">
+    <void property="mail">
+     <string>dassd@dsad.as</string>
+    </void>
+    <void property="password">
+     <string>asd</string>
+    </void>
+    <void property="tipoAcesso">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>Model.tiposAcesso</class>
+      <string>ALUNO</string>
+     </object>
+    </void>
+    <void property="user">
+     <string>davi</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.Cadastro">
+    <void property="mail">
+     <string>dasd@sda.br</string>
+    </void>
+    <void property="password">
+     <string>asd</string>
+    </void>
+    <void property="tipoAcesso">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>Model.tiposAcesso</class>
+      <string>PROFESSOR</string>
+     </object>
+    </void>
+    <void property="user">
+     <string>david</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
