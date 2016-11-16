@@ -28,11 +28,12 @@ public class MenuController {
 			case ALUNO:
 		        opcoes[1].setBotaoOpcaoText("Minhas Perguntas");
 		        opcoes[1].setBotaoOpcaoName("MINHAS_PERG");
+		        menuView.unhideItem();
 		        break;
 			case PROFESSOR:
 		        opcoes[1].setBotaoOpcaoText("Responder Perguntas");
 		        opcoes[1].setBotaoOpcaoName("RESP_PERG");
-//		        menuView.hideItem();
+		        menuView.hideItem();
 		        break;
 		}
 		

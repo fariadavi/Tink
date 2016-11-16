@@ -77,7 +77,7 @@ public class TelaMenu extends JFrame {
                 .addComponent(getOpcoes()[3], GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(getOpcoes()[4], GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         
 
@@ -88,6 +88,10 @@ public class TelaMenu extends JFrame {
 		getOpcoes()[0].setVisible(false);
 	}
 
+	public void unhideItem() {
+		getOpcoes()[0].setVisible(true);
+	}
+	
 	public void addMenuListener(ActionListener menuListener) {
 		for (ItemMenu itemMenu : getOpcoes()) {
 			itemMenu.getBotaoOpcao().addActionListener(menuListener);
