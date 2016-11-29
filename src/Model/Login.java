@@ -1,6 +1,4 @@
-package Model;
-
-import java.util.List;
+package model;
 
 public class Login {
 
@@ -12,16 +10,6 @@ public class Login {
 		this.user = user;
 		this.password = password;
 		this.tipoAcesso = isAluno ? tiposAcesso.ALUNO : isProfessor ? tiposAcesso.PROFESSOR : null;
-	}
-
-	public boolean checkForUser() {
-		List<Cadastro> leCadastros = ManipulaCadastros.leCadastros(tiposArquivo.CADASTRO);
-
-		for (Cadastro cadastro : leCadastros)
-			if (cadastro.getUser().equals(getUser()) && cadastro.getPassword().equals(getPassword())
-					&& cadastro.getTipoAcesso().equals(getTipoAcesso()))
-				return true;
-		return false;
 	}
 
 	public String getUser() {

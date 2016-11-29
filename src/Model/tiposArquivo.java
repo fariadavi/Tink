@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public enum tiposArquivo {
 	CADASTRO("cadastros.xml"), RANKING("ranking.xml");

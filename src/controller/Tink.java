@@ -1,10 +1,10 @@
+package controller;
 import java.util.Enumeration;
 
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
-import Controller.LoginController;
-import View.TelaLogin;
+import view.TelaLogin;
 
 public class Tink {
 
@@ -13,8 +13,7 @@ public class Tink {
 
 		TelaLogin view = new TelaLogin();
 
-		@SuppressWarnings("unused")
-		LoginController controller = new LoginController(view);
+		new LoginHandler(view);
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {

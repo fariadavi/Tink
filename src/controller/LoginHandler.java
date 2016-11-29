@@ -1,20 +1,23 @@
-package Controller;
+package controller;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Model.Login;
-import View.TelaMenu;
-import View.TelaCadastro;
-import View.TelaLogin;
+import model.Login;
+import model.LoginHelper;
+import view.TelaCadastro;
+import view.TelaLogin;
+import view.TelaMenu;
 
-public class LoginController {
+public class LoginHandler {
 
 	private TelaLogin loginView;
+	private LoginHelper loginHelper;
 
-	public LoginController(TelaLogin view) {
+	public LoginHandler(TelaLogin view) {
 		this.loginView = view;
+		this.loginHelper = new LoginHelper();
 
 		this.loginView.addLoginListener(new LoginListener());
 	}
@@ -37,14 +40,16 @@ public class LoginController {
 					break;
 				}
 				
-				Login login = new Login(loginView.getUser(), loginView.getPassword(), loginView.isAluno(), loginView.isProfessor());
-				if(!login.checkForUser()) {
-					loginView.displayMessage("Usuário não cadastrado!");
+				Login loginInfo = new Login(loginView.getUser(), loginView.getPassword(), loginView.isAluno(), loginView.isProfessor());
+				loginHelper.setLoginInfo(loginInfo);
+				
+				if(!loginHelper.validLogin()) {
+					loginView.displayMessage("Usuário e/ou senha inválidos!");
 					break;
 				}
 				
 				TelaMenu telaMenu = new TelaMenu();
-				new MenuController(telaMenu, login.getTipoAcesso()); 
+				new MenuHandler(telaMenu, loginInfo.getTipoAcesso()); 
 				telaMenu.setVisible(true);
 				telaMenu.setLocationRelativeTo(null);
 				loginView.dispose();
@@ -52,7 +57,7 @@ public class LoginController {
 
 			case "CAD":
 				TelaCadastro telaCadastro = new TelaCadastro(loginView, true);
-				new CadastroController(telaCadastro);
+				new CadastroHandler(telaCadastro);
 				telaCadastro.setLocationRelativeTo(loginView);
 				telaCadastro.setVisible(true);
 				break;

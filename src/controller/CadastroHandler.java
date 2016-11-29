@@ -1,19 +1,20 @@
-package Controller;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Model.Cadastro;
-import Model.ManipulaCadastros;
-import Model.tiposArquivo;
-import View.TelaCadastro;
+import model.Cadastro;
+import model.CadastroHelper;
+import view.TelaCadastro;
 
-public class CadastroController {
+public class CadastroHandler {
 
 	private TelaCadastro cadView;
+	private CadastroHelper cadHelper;
 
-	public CadastroController(TelaCadastro view) {
+	public CadastroHandler(TelaCadastro view) {
 		this.cadView = view;
+		this.cadHelper = new CadastroHelper();
 
 		this.cadView.addCadastroListener(new CadastroListener());
 	}
@@ -42,19 +43,20 @@ public class CadastroController {
 				}
 
 				Cadastro novoCadastro = new Cadastro(cadView.getUser(), cadView.getPswd(), cadView.getMail(), cadView.isAluno(), cadView.isProfessor());
-
-				if (!novoCadastro.isValidMail()) {
+				cadHelper.setCadastro(novoCadastro);
+				
+				if (!cadHelper.isValidMail()) {
 					cadView.displayMessage("Formato de e-mail inválido!");
 					break;
 				}
 
-				String errorMessage = novoCadastro.checkForUser();
-				if (!errorMessage.isEmpty()) {
-					cadView.displayMessage(errorMessage);
+				String errorMsgUserExists = cadHelper.getErrorMsgUserExists();
+				if (errorMsgUserExists != null && !errorMsgUserExists.isEmpty()) {
+					cadView.displayMessage(errorMsgUserExists);
 					break;
 				}
 
-				ManipulaCadastros.adicionaCadastro(novoCadastro, tiposArquivo.CADASTRO);
+				cadHelper.salvaCadastro();
 
 				cadView.displayMessage("Usuário cadastrado com sucesso!");
 				cadView.dispose();

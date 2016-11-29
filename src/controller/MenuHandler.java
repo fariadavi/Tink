@@ -1,24 +1,27 @@
-package Controller;
+package controller;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Model.tiposAcesso;
-import View.ItemMenu;
-import View.TelaMenu;
+import model.tiposAcesso;
+import view.ItemMenu;
+import view.TelaLogin;
+import view.TelaMenu;
+import view.TelaRanking;
 
-public class MenuController {
+public class MenuHandler {
 	private TelaMenu menuView;
 	private tiposAcesso tipoAcesso;
 	
-	public MenuController(TelaMenu menuView, tiposAcesso tipoAcesso) {
+	public MenuHandler(TelaMenu menuView, tiposAcesso tipoAcesso) {
 		this.menuView = menuView;
 		this.tipoAcesso = tipoAcesso;
 		
 		this.menuView.addMenuListener(new MenuListener());
 		
 		setTipoMenu();
+		menuView.pack();
 	}
 
 	private void setTipoMenu() {
@@ -60,8 +63,20 @@ public class MenuController {
 				break;
 				
 			case "RANKING":
+				TelaRanking telaRanking = new TelaRanking();
+				new RankingHandler(telaRanking); 
+				telaRanking.setVisible(true);
+				telaRanking.setLocationRelativeTo(null);
 				break;
 
+			case "LOGOUT":
+				TelaLogin telaLogin = new TelaLogin();
+				new LoginHandler(telaLogin); 
+				telaLogin.setVisible(true);
+				telaLogin.setLocationRelativeTo(null);
+				menuView.dispose();
+				break;
+				
 			case "SAIR":
 				System.exit(0);
 			}

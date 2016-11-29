@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -9,19 +9,10 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManipulaCadastros {
-
-	public static List<Cadastro> leCadastros(tiposArquivo tipo) {
-		return leCadastros(tipo.getFilepath());
-	}
-
-	public static void adicionaCadastro(Cadastro novoCadastro, tiposArquivo tipo) {
-		List<Cadastro> cadastros = leCadastros(tipo.getFilepath());
-		cadastros.add(novoCadastro);
-		escreveCadastros(cadastros, tipo.getFilepath());
-	}
-
-	private static List<Cadastro> leCadastros(String filepath) {
+public class XmlDAOSupport {
+	
+	@SuppressWarnings("unchecked")
+	protected List<Cadastro> readXML(String filepath) {
 		List<Cadastro> cadastros = null;
 		XMLDecoder decoder = null;
 
@@ -41,14 +32,12 @@ public class ManipulaCadastros {
 			}
 		} else {
 			cadastros = new ArrayList<Cadastro>();
-//			cadastros = new Cadastro[0];
 		}
 		
 		return cadastros;
-//		return new ArrayList<Cadastro>(Arrays.asList(cadastros));
 	}
 
-	private static void escreveCadastros(List<Cadastro> cadastros, String filepath) {
+	protected void writeXML(List<Cadastro> cadastros, String filepath) {
 		XMLEncoder encoder = null;
 		try {
 			try {
