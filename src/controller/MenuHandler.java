@@ -8,6 +8,7 @@ import model.tiposAcesso;
 import view.ItemMenu;
 import view.TelaLogin;
 import view.TelaMenu;
+import view.TelaNovaPergunta;
 import view.TelaRanking;
 
 public class MenuHandler {
@@ -51,6 +52,10 @@ public class MenuHandler {
 			switch (component.getName()) {
 
 			case "CRIAR_PERG":
+				TelaNovaPergunta telanovapergunta = new TelaNovaPergunta();
+				telanovapergunta.setVisible(true);
+				telanovapergunta.setLocationRelativeTo(null);	
+				
 				break;
 
 			case "MINHAS_PERG":
